@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareAid - Charity Donation System</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+
+  <header class="bg-blue-600 text-white p-6 text-center shadow-lg">
+    <h1 class="text-3xl font-bold">🌍 CareAid - Charity Donation System</h1>
+  </header>
+
+  <nav class="p-5 bg-blue-500 text-white flex justify-between">
+    <h2 class="text-xl">Helping Hands, Changing Lives</h2>
+
+    <button onclick="toggleDarkMode()"
+      class="bg-gray-800 px-3 py-1 rounded">
+      🌙 Dark Mode
+    </button>
+  </nav>
+
+  <div class="container mx-auto mt-10 p-5">
+
+    <section id="loginSection"
+      class="bg-white p-5 rounded shadow-lg max-w-md mx-auto text-center">
+
+      <h2 class="text-2xl mb-4">Login</h2>
+
+      <input type="email" id="email"
+        placeholder="Email"
+        class="border p-2 w-full mb-2">
+
+      <input type="password" id="password"
+        placeholder="Password"
+        class="border p-2 w-full mb-2">
+
+      <button onclick="login()"
+        class="bg-blue-500 text-white px-4 py-2 rounded">
+        Login
+      </button>
+    </section>
+
+    <section id="dashboardSection" class="hidden text-center">
+
+      <h2 class="text-3xl mb-4">Donation Dashboard</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+
+        <div class="bg-green-500 text-white p-5 rounded shadow">
+          Total Donations: $
+          <span id="totalDonations">0</span>
+        </div>
+
+        <div class="bg-blue-500 text-white p-5 rounded shadow">
+          Total Donors:
+          <span id="totalDonors">0</span>
+        </div>
+
+        <div class="bg-yellow-500 text-white p-5 rounded shadow">
+          Recent Donation:
+          <span id="recentDonation">None</span>
+        </div>
+      </div>
+
+      <div class="mt-5 space-x-2">
+        <button onclick="showSection('donationSection')"
+          class="bg-green-500 text-white px-4 py-2 rounded">
+          Make a Donation
+        </button>
+
+        <button onclick="loadDonorReport(); showSection('donorReportSection')"
+          class="bg-blue-500 text-white px-4 py-2 rounded">
+          View Donor Report
+        </button>
+      </div>
+
+      <div class="bg-white mt-10 p-5 rounded shadow">
+        <canvas id="donationChart"></canvas>
+      </div>
+    </section>
+
+    <section id="donationSection" class="hidden text-center">
+
+      <h2 class="text-2xl mb-4">Make a Donation</h2>
+
+      <input type="text" id="donorName"
+        placeholder="Full Name"
+        class="border p-2 w-full mb-2">
+
+      <input type="email" id="donorEmail"
+        placeholder="Email"
+        class="border p-2 w-full mb-2">
+
+      <input type="number" id="donationAmount"
+        placeholder="Amount ($)"
+        class="border p-2 w-full mb-2">
+
+      <select id="paymentMethod"
+        class="border p-2 w-full mb-2">
+
+        <option value="Credit Card">Credit Card</option>
+        <option value="PayPal">PayPal</option>
+        <option value="UPI">UPI</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+      </select>
+
+      <div class="space-x-2 mt-3">
+
+        <button onclick="addDonation()"
+          class="bg-green-500 text-white px-4 py-2 rounded">
+          Donate
+        </button>
+
+        <button onclick="showSection('dashboardSection')"
+          class="bg-red-500 text-white px-4 py-2 rounded">
+          🔙 Back
+        </button>
+      </div>
+    </section>
+
+    <section id="donorReportSection" class="hidden text-center">
+
+      <h2 class="text-2xl mb-4">Donor Report</h2>
+
+      <div class="overflow-x-auto">
+
+        <table class="border w-full mt-4 text-left">
+
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="p-2">Name</th>
+              <th class="p-2">Email</th>
+              <th class="p-2">Amount</th>
+              <th class="p-2">Date</th>
+              <th class="p-2">Payment</th>
+            </tr>
+          </thead>
+
+          <tbody id="donorReportTable" class="bg-white"></tbody>
+        </table>
+      </div>
+
+      <button onclick="showSection('dashboardSection')"
+        class="bg-red-500 text-white px-4 py-2 mt-3 rounded">
+        🔙 Back
+      </button>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
